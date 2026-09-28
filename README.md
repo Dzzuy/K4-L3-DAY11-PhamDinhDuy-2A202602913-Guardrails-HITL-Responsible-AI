@@ -133,4 +133,23 @@ pip install -r requirements.txt
 Điền `.env`: `OPENROUTER_API_KEY` + `RED_TEAM_PROVIDER=openai|gemini` (và key tương ứng).  
 Rồi mở [`CHECKPOINTS.md`](CHECKPOINTS.md) và làm lần lượt Checkpoint 1 → 5.
 
+### Multilingual prompt-injection guardrail
+
+CP2 keeps deterministic Unicode normalization and regex rules for fast,
+reproducible blocking. It can additionally use local **Llama Prompt Guard 2
+86M** for semantic and multilingual injection/jailbreak detection. Install the
+normal lab requirements, then install the CPU runtime below. Accept Meta's
+gated-model license on Hugging Face, and expose an `HF_TOKEN` only in your
+shell or `.env` (never Git):
+
+```bash
+python -m pip install --index-url https://download.pytorch.org/whl/cpu torch
+python -m pip install -r requirements-prompt-guard.txt
+```
+
+The detector is enabled by default and falls back to deterministic rules if
+weights are unavailable; set `PROMPT_GUARD_ENABLED=false` to disable it
+explicitly. Long input is tokenized into 510-token chunks and every chunk is
+classified.
+
 Nộp theo [`SUBMISSION.md`](SUBMISSION.md) · Quy định: [`RULES.md`](RULES.md).

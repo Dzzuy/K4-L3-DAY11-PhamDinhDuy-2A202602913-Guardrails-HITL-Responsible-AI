@@ -19,6 +19,7 @@ from google.adk.plugins import base_plugin
 from google.adk.agents.invocation_context import InvocationContext
 
 from core.config import ALLOWED_TOPICS, BLOCKED_TOPICS
+from guardrails.prompt_guard import classify_prompt
 
 # Quyết định rõ ràng — tránh đảo nghĩa True/False
 InputStatus = Literal["ALLOW", "BLOCK"]
@@ -71,7 +72,9 @@ def _contains_topic(text: str, topic: str) -> bool:
 # Also handle an instruction embedded in an untrusted email/RAG document, e.g.
 # ``Ignore\u200b all previous instructions``. Do not block a benign request to
 # summarize an external bank-transfer email just because it is external data.
-# Regex is one signal, not the whole security boundary.
+# Regex is one signal, not the whole security boundary.  A local multilingual
+# Prompt Guard classifier runs as a second signal when its optional runtime is
+# installed.  It catches translated and semantic attacks beyond these rules.
 # ============================================================
 
 def detect_injection(user_input: str) -> InputStatus:
@@ -87,6 +90,8 @@ def detect_injection(user_input: str) -> InputStatus:
     for pattern in _INJECTION_PATTERNS:
         if re.search(pattern, normalized_input, re.IGNORECASE):
             return "BLOCK"
+    if classify_prompt(normalized_input).status == "MALICIOUS":
+        return "BLOCK"
     return "ALLOW"
 
 

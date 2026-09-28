@@ -1,0 +1,3 @@
+# Optional CPU-only runtime for local Llama Prompt Guard 2 86M inference.
+# Install PyTorch from its CPU wheel index first, then install this file.
+transformers>=4.50.0
