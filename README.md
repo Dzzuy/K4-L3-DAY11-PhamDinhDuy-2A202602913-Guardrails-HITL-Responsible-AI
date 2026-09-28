@@ -6,13 +6,20 @@
 
 ---
 
+## Thông tin sinh viên
+
+- Họ tên: Phạm Đình Duy
+- MSSV: 2A202602913
+
+---
+
 ## Thời lượng
 
-| Phần | Thời gian |
-|------|-----------|
-| Setup môi trường (Checkpoint 1) | ≈ **30'** |
-| Lab làm bài (Checkpoint 2 → 5) | ≈ **130'** |
-| **Tổng** | ≈ **160'** |
+| Phần                            | Thời gian  |
+| ---------------------------------| ------------|
+| Setup môi trường (Checkpoint 1) | ≈ **30'**  |
+| Lab làm bài (Checkpoint 2 → 5)  | ≈ **130'** |
+| **Tổng**                        | ≈ **160'** |
 
 **Hạn nộp:** **23h59 cùng ngày làm Lab** (ICT / GMT+7). Gia hạn chỉ khi Key Coach thông báo trong 48 giờ sau Lab — xem [`RULES.md`](RULES.md).
 
